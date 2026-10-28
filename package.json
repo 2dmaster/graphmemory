@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "npm run build:server && npm run build:ui",
-    "build:server": "rm -rf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
+    "build:server": "rm -rf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json && chmod +x dist/cli/index.js",
     "build:ui": "cd ui && npm run build && cp -r dist ../dist/ui",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
@@ -97,5 +97,15 @@
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
+  },
+  "allowScripts": {
+    "esbuild@0.27.3": true,
+    "fsevents@2.3.3": true,
+    "onnxruntime-node@1.21.0": true,
+    "protobufjs@7.5.4": true,
+    "sharp@0.34.5": true,
+    "tree-sitter@0.21.1": true,
+    "tree-sitter-gdscript@6.1.0": true,
+    "unrs-resolver@1.11.1": true
   }
 }
