@@ -31,7 +31,7 @@ export interface ExtractedImport {
   specifier: string;
 }
 
-/** Language mapper interface — one per language. */
+/** Tree-sitter-based language mapper — operates on a tree-sitter AST root node. */
 export interface LanguageMapper {
   /** Extract top-level symbols (with nested children) from a tree-sitter root node. */
   extractSymbols(rootNode: SyntaxNode): ExtractedSymbol[];
@@ -39,4 +39,16 @@ export interface LanguageMapper {
   extractEdges(rootNode: SyntaxNode): ExtractedEdge[];
   /** Extract relative import specifiers from a tree-sitter root node. */
   extractImports(rootNode: SyntaxNode): ExtractedImport[];
+}
+
+/**
+ * Regex-based language mapper. Operates directly on raw source text — used as
+ * a fallback for languages without a tree-sitter grammar. Less accurate than
+ * `LanguageMapper`, but works for any text-based language without bundling
+ * additional WASM grammars.
+ */
+export interface RegexLanguageMapper {
+  extractSymbols(source: string): ExtractedSymbol[];
+  extractEdges(source: string): ExtractedEdge[];
+  extractImports(source: string): ExtractedImport[];
 }
